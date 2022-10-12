@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Manufacturers</h1>
+  {% for m in manufacturers %}
+    <hr>
+    <li>
+     <p>{{ m.name }}, {{ m.country_origin }}:</p>
+    </li>
+    {% for t in m.tools.all %}
+    {{ t.title }}, EAN: {{ t.ean_code }}, pagaminimo data: {{ t.date_production }}
+    {% endfor %}
+    {% endfor %}
+
+{% endblock %}
