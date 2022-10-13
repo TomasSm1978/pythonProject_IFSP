@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Manufacturers</h1>
-  {% for m in manufacturers %}
+  <h1>Categories</h1>
+  {% for c in categories %}
     <hr>
     <li>
-     <p>{{ m.name }}, {{ m.country_origin }}:</p>
+      <p>{{ c.name }}: </p>
+      <p>{{ c.tool_set.all|join:"<br> " }}</p>
     </li>
-    {% for t in m.tools.all %}
-    {{ t.title }}, EAN: {{ t.ean_code }}, pagaminimo data: {{ t.date_production }}
-    {% endfor %}
     {% endfor %}
 
 {% endblock %}

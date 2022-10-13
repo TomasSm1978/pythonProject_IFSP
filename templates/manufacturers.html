@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Manufacturers</h1>
+  {% for m in manufacturers %}
+    <hr>
+    <li>
+         <a href="{% url 'manufacturer' m.pk %}">{{ m.name }}, {{ m.country_origin }}</a>
+    </li>
+    {% for t in m.tools.all %}
+    {{ t.toolcopy_set.all|join:"<br> " }}
+    {% endfor %}
+
+{{ c.tool_set.all|join:"<br> " }}
+
+
+    {% endfor %}
+
+{% endblock %}

@@ -15,6 +15,10 @@ class Category(models.Model):
 class Manufacturer(models.Model):
     name = models.CharField('Manufacturer name', max_length=200)
     country_origin = models.CharField('Manufacturer country of origin', max_length=200)
+    description = models.CharField('Manufacturer description', max_length=500)
+
+    def get_absolute_url(self):
+        return reverse('manufacturer', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.name} ({self.country_origin})'
