@@ -64,11 +64,11 @@
             {% endif %}
             </p>
             <li><strong class="{% if toolcopy.is_overdue %}text-danger{% endif %}">Due back: {{ toolcopy.due_back }}</strong></li>
-
+            {% if toolcopy.status == 'r' %}
             <div>
-              <a class="btn btn-outline-secondary btn-sm" href="#">Edit</a>
-             <a class="btn btn-outline-danger btn-sm" href="#">Delete</a>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-cancel-reserve' toolcopy.id %}">Cancel reservation</a>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>

@@ -84,16 +84,33 @@ class ToolCopyCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ToolCopyUpdateView_customer(LoginRequiredMixin, UpdateView):
+class ToolCopyUpdateView_reserve(LoginRequiredMixin, UpdateView):
     model = ToolCopy
     fields = ['tool']
     success_url = "/tools/"
-    template_name = 'toolcopy_update_form_customer.html'
+    template_name = 'toolcopy_update_reserve_form.html'
 
     def form_valid(self, form):
-        form.instance.reader = self.request.user
+        form.instance.customer = self.request.user
         form.instance.status = 'r'
         form.instance.due_back = date.today() + timedelta(days=10)
+        return super().form_valid(form)
+
+    def test_func(self):
+        toolcopy = self.get_object()
+        return self.request.user == toolcopy.customer
+
+
+class ToolCopyUpdateView_cancel_reserve(LoginRequiredMixin, UpdateView):
+    model = ToolCopy
+    fields = ['tool']
+    success_url = "/tools/"
+    template_name = 'toolcopy_update_cancel_reserve_form.html'
+
+    def form_valid(self, form):
+        form.instance.customer = None
+        form.instance.status = 'a'
+        form.instance.due_back = date.today() + timedelta(days=30)
         return super().form_valid(form)
 
     def test_func(self):

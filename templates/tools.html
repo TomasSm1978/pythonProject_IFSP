@@ -29,8 +29,8 @@
             <a class="btn btn-outline-secondary btn-sm" href="{% url 'user-tools' %}">Edit</a>
             <a class="btn btn-outline-danger btn-sm" href="#">Delete</a>
             {% else %}
-            {% if copy.status == 'a' %}
-            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-customer' copy.id %}">Reserve</a>
+            {% if toolcopy.status == 'a' %}
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
             {% endif %}
             {% endif %}
             {% endfor %}

@@ -13,7 +13,8 @@ urlpatterns = [
    path('accounts/sign_up/', views.sign_up, name='sign_up'),
    path('accounts/user_profile/', views.user_profile, name='user_profile'),
    path('toolcopy/new/', views.ToolCopyCreateView.as_view(), name='toolcopy-create'),
-   path('toolcopy_user/<str:pk>/update', views.ToolCopyUpdateView_customer.as_view(), name='toolcopy-update-customer'),
+   path('toolcopy/<str:pk>/reserve', views.ToolCopyUpdateView_reserve.as_view(), name='toolcopy-update-reserve'),
+   path('toolcopy/<str:pk>/cancel_reserve', views.ToolCopyUpdateView_cancel_reserve.as_view(), name='toolcopy-update-cancel-reserve'),
 
 ]
 
