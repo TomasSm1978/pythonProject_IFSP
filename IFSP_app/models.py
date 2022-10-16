@@ -1,8 +1,12 @@
 from django.db import models
 from django.urls import reverse
 import uuid
-from django.contrib.auth.models import User
 from datetime import date
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    image = models.ImageField(null=True, blank=True)
 
 
 class Category(models.Model):
