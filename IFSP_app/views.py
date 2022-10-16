@@ -84,7 +84,7 @@ class ToolCopyCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ToolCopyUpdateView_user(LoginRequiredMixin, UpdateView):
+class ToolCopyUpdateView_customer(LoginRequiredMixin, UpdateView):
     model = ToolCopy
     fields = ['tool']
     success_url = "/tools/"

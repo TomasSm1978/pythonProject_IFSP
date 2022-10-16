@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 {% load static %}
   <h1>Today we offer:</h1>
@@ -27,11 +26,11 @@
             {% endif %}
             </p>
             {% if user.is_superuser %}
-            <a class="btn btn-outline-secondary btn-sm" href="#">Edit</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'user-tools' %}">Edit</a>
             <a class="btn btn-outline-danger btn-sm" href="#">Delete</a>
             {% else %}
             {% if copy.status == 'a' %}
-            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-create-user' copy.id %}">Reserve</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-customer' copy.id %}">Reserve</a>
             {% endif %}
             {% endif %}
             {% endfor %}

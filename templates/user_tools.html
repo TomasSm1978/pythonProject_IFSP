@@ -2,10 +2,11 @@
 
 {% block content %}
 {% load static %}
-<h1>My tools:</h1>
-<hr>
+
 {% if user.is_superuser %}
 {% if toolcopies_all %}
+<h1>All tool copies:</h1>
+<hr>
   <div class="row">
     {% for toolcopy in toolcopies_all %}
       <div class="col-md-4 d-flex align-items-stretch">
@@ -41,6 +42,8 @@
   {% endif %}
 {% else %}
 {% if toolcopies %}
+<h1>My borrowwed or reserved tools:</h1>
+<hr>
   <div class="row">
     {% for toolcopy in toolcopies %}
       <div class="col-md-4 d-flex align-items-stretch">
