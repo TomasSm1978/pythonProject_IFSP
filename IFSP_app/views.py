@@ -9,14 +9,16 @@ from datetime import date, timedelta
 from django.db.models import Q
 
 def home(request):
-    num_tools = Tool.objects.all().count()
+    num_tool = Tool.objects.all().count()
+    num_category = Category.objects.all().count()
     num_toolcopy = ToolCopy.objects.all().count()
     num_toolcopy_available = ToolCopy.objects.filter(status__exact='a').count()
     num_manufacturers = Manufacturer.objects.count()
     num_visits = request.session.get('num_visits', 1)
     request.session['num_visits'] = num_visits + 1
     context = {
-    'num_tools': num_tools,
+    'num_tool': num_tool,
+    'num_category': num_category,
     'num_toolcopy': num_toolcopy,
     'num_toolcopy_available': num_toolcopy_available,
     'num_manufacturers': num_manufacturers,
