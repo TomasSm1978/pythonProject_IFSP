@@ -74,4 +74,4 @@ class ToolCopy(models.Model):
         return False
 
     def get_absolute_url(self):
-        return reverse('tool-detail', args=[str(self.id)])
+        return reverse('user-tools', args=[str(self.id)])

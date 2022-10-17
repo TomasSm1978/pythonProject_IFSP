@@ -84,6 +84,17 @@ class ToolCopyCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class ToolCopyUpdateView(LoginRequiredMixin, UpdateView):
+    model = ToolCopy
+    fields = ['tool', 'price', 'due_back', 'customer', 'status']
+    success_url = "/mytools"
+    template_name = 'toolcopy_update.html'
+
+    def test_func(self):
+        book = self.get_object()
+        return self.request.user == book.reader
+
+
 class ToolCopyUpdateView_reserve(LoginRequiredMixin, UpdateView):
     model = ToolCopy
     fields = ['tool']

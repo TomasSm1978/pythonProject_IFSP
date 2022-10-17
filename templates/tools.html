@@ -16,6 +16,9 @@
             <a href="{% url 'tool' tool.pk %}">{{ tool.title }}</a>
             <a href="{% url 'manufacturer' tool.manufacturer.pk %}">({{ tool.manufacturer }})</a>, {{ tool.category.all|join:", " }}
             <hr>
+            {% if user.is_superuser %}
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-create' %}">New tool copy</a>
+            {% endif %}
             {% for toolcopy in tool.toolcopy_set.all %}
             <hr>
             <p class="{% if toolcopy.status == 'a' %}text-success{% elif toolcopy.status == 'b' %}text-danger{% else %}text-warning{% endif %}">
@@ -26,8 +29,7 @@
             {% endif %}
             </p>
             {% if user.is_superuser %}
-            <a class="btn btn-outline-secondary btn-sm" href="{% url 'user-tools' %}">Edit</a>
-            <a class="btn btn-outline-danger btn-sm" href="#">Delete</a>
+
             {% else %}
             {% if toolcopy.status == 'a' %}
             <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
