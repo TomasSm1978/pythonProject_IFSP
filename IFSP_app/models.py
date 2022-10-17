@@ -65,7 +65,7 @@ class ToolCopy(models.Model):
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-       return f'{self.tool.title}, {self.price} eur, {self.status}, ({self.tool.manufacturer.name}, {self.tool.manufacturer.country_origin}, {self.tool.ean_code})'
+       return f'{self.tool.title}, {self.price} eur'
 
     @property
     def is_overdue(self):

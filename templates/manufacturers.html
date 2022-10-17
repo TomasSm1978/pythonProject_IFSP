@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Manufacturers</h1>
+  <h1>Manufacturers:</h1>
   {% for m in manufacturers %}
     <hr>
     <li>
@@ -10,8 +10,9 @@
     {% for t in m.tools.all %}
     {{ t.toolcopy_set.all|join:"<br> " }}
     {% endfor %}
-{{ c.tool_set.all|join:"<br> " }}
+
     {% endfor %}
+<br>
 <br>
 <a class="btn btn-outline-secondary btn-sm" href="{% url 'home' %}">Home</a>
 {% endblock %}

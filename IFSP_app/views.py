@@ -1,14 +1,28 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Category, Manufacturer, Tool, ToolCopy
-from django.contrib.auth.decorators import login_required, permission_required
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SignUpForm
 from django.contrib.auth import login
 from datetime import date, timedelta
+from django.db.models import Q
 
 def home(request):
-    return render(request, 'home.html')
+    num_tools = Tool.objects.all().count()
+    num_toolcopy = ToolCopy.objects.all().count()
+    num_toolcopy_available = ToolCopy.objects.filter(status__exact='a').count()
+    num_manufacturers = Manufacturer.objects.count()
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+    context = {
+    'num_tools': num_tools,
+    'num_toolcopy': num_toolcopy,
+    'num_toolcopy_available': num_toolcopy_available,
+    'num_manufacturers': num_manufacturers,
+    'num_visits': num_visits,
+    }
+    return render(request, 'home.html', context=context)
 
 
 def manufacturers(request):
@@ -137,3 +151,9 @@ class ToolCopyDeleteView(LoginRequiredMixin, DeleteView):
     def test_func(self):
         toolcopy = self.get_object()
         return self.request.user == toolcopy.customer
+
+
+def search(request):
+    query = request.GET.get('query')
+    search_results = Tool.objects.filter(Q(title__icontains=query) | Q(manufacturer__name__icontains=query) | Q(manufacturer__country_origin__icontains=query) | Q(category__name__icontains=query))
+    return render(request, 'search.html', {'tools': search_results, 'query': query})

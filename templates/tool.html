@@ -22,6 +22,9 @@
         <p><strong>Will be available from:</strong> {{ toolcopy.due_back }}</p>
       {% endif %}
       <p class="text-muted"><strong>Id:</strong> {{ toolcopy.id }}</p>
+    {% if toolcopy.status == 'a' %}
+       <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
+    {% endif %}
     {% endfor %}
   </div>
 <br>
