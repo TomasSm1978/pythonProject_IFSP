@@ -30,7 +30,7 @@
 
             <div>
               <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update' toolcopy.id %}">Edit</a>
-              <a class="btn btn-outline-danger btn-sm" href="#">Delete</a>
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'toolcopy-delete' toolcopy.id %}">Delete</a>
             </div>
           </div>
         </div>
@@ -65,6 +65,7 @@
             </p>
             <li><strong class="{% if toolcopy.is_overdue %}text-danger{% endif %}">Due back: {{ toolcopy.due_back }}</strong></li>
             {% if toolcopy.status == 'r' %}
+            <hr>
             <div>
               <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-cancel-reserve' toolcopy.id %}">Cancel reservation</a>
             </div>

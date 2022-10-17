@@ -87,7 +87,7 @@ class ToolCopyCreateView(LoginRequiredMixin, CreateView):
 class ToolCopyUpdateView(LoginRequiredMixin, UpdateView):
     model = ToolCopy
     fields = ['tool', 'price', 'due_back', 'customer', 'status']
-    success_url = "/mytools"
+    success_url = "/mytools/"
     template_name = 'toolcopy_update.html'
 
     def test_func(self):
@@ -97,7 +97,7 @@ class ToolCopyUpdateView(LoginRequiredMixin, UpdateView):
 
 class ToolCopyUpdateView_reserve(LoginRequiredMixin, UpdateView):
     model = ToolCopy
-    fields = ['tool']
+    fields = []
     success_url = "/tools/"
     template_name = 'toolcopy_update_reserve_form.html'
 
@@ -114,8 +114,8 @@ class ToolCopyUpdateView_reserve(LoginRequiredMixin, UpdateView):
 
 class ToolCopyUpdateView_cancel_reserve(LoginRequiredMixin, UpdateView):
     model = ToolCopy
-    fields = ['tool']
-    success_url = "/tools/"
+    fields = []
+    success_url = "/mytools/"
     template_name = 'toolcopy_update_cancel_reserve_form.html'
 
     def form_valid(self, form):
@@ -123,6 +123,16 @@ class ToolCopyUpdateView_cancel_reserve(LoginRequiredMixin, UpdateView):
         form.instance.status = 'a'
         form.instance.due_back = date.today() + timedelta(days=30)
         return super().form_valid(form)
+
+    def test_func(self):
+        toolcopy = self.get_object()
+        return self.request.user == toolcopy.customer
+
+
+class ToolCopyDeleteView(LoginRequiredMixin, DeleteView):
+    model = ToolCopy
+    success_url = "/mytools"
+    template_name = 'toolcopy_delete.html'
 
     def test_func(self):
         toolcopy = self.get_object()

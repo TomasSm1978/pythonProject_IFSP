@@ -16,6 +16,7 @@ urlpatterns = [
    path('toolcopy/<str:pk>/update', views.ToolCopyUpdateView.as_view(), name='toolcopy-update'),
    path('toolcopy/<str:pk>/reserve', views.ToolCopyUpdateView_reserve.as_view(), name='toolcopy-update-reserve'),
    path('toolcopy/<str:pk>/cancel_reserve', views.ToolCopyUpdateView_cancel_reserve.as_view(), name='toolcopy-update-cancel-reserve'),
+   path('toolcopy/<str:pk>/delete', views.ToolCopyDeleteView.as_view(), name='toolcopy-delete'),
 
 ]
 
