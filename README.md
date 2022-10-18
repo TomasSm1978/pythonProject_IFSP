@@ -1,25 +1,22 @@
 # Introduction
 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
+Tools rent reservation page designed for customers, who needs to rent some tools and wants to reserve them before they'll physically come in our rent garage.
 
 
 
 # Getting Started
-
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-
-
-
-1. Installation process
-
-2. Software dependencies
-
-3. Latest releases
-
-4. API references
-
+Requirements:
+asgiref==3.5.2
+Django==4.1.2
+Pillow==9.2.0
+sqlparse==0.4.3
+Project use local database db.sqlite3 file.
+There are two groups of users - manager of this page (admin) and customers.
+Admin can manage information in this page, add tool copies, edit them ,delete. 
+Customers can see all Tools, their copies, can make or cancel their reservations, can check their reserved or borrowed tools.
 
 
 # Build
-
-TODO: Describe and show how to build your code.
+To test project with both roles:
+Manager (username: admin, password: admin).
+Customer (username: Customer_1, password: pass12345)
