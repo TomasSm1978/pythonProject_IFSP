@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-  <h1>Welcome to the best tools rent reservation page!</h1>
+  <h1 class="text-center">Welcome to the best tools rent reservation page!</h1>
   <p></p>
   <div class="row">
     <div class="col-md-4 d-flex align-items-stretch">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h2>You're on the right way. Today we offer:</h2>
+          <h2>You're on the right way.</h2>
+          <h2>Today we offer:</h2>
           <hr>
           <ul>
           <li><strong>Manufacturers:</strong> {{ num_manufacturers }}</li>
@@ -20,6 +21,7 @@
           <li><strong>Number of this page users:</strong> {{ num_users }}</li>
         </ul>
           <hr>
+          <br>
         <p>Your visits: {{ num_visits }}</p>
         </div>
       </div>

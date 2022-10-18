@@ -5,7 +5,9 @@
   {% for c in categories %}
     <hr>
     <li>
-      <p>{{ c.name }}: </p>
+      <p>{{ c.name }} </p>
+      <p>Tools we offer: </p>
+
       <p>{{ c.tool_set.all|join:"<br> " }}</p>
     </li>
     {% endfor %}

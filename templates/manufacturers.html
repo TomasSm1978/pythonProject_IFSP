@@ -6,6 +6,7 @@
     <hr>
     <li>
          <a href="{% url 'manufacturer' m.pk %}">{{ m.name }}, {{ m.country_origin }}</a>
+         <p>Tool copies we offer: </p>
     </li>
     {% for t in m.tools.all %}
     {{ t.toolcopy_set.all|join:"<br> " }}

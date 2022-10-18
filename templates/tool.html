@@ -23,7 +23,9 @@
       {% endif %}
       <p class="text-muted"><strong>Id:</strong> {{ toolcopy.id }}</p>
     {% if toolcopy.status == 'a' %}
+    {% if user.is_superuser == False %}
        <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
+    {% endif %}
     {% endif %}
     {% endfor %}
   </div>
