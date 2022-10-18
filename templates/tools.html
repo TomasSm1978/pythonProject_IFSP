@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+  <h1>Today we offer:</h1>
+  {% if tools %}
+  <div class="row">
+    {% for tool in tools %}
+      <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+          {% if tool.image %}
+              <img src="{{tool.image.url}}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.jpg' %}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <a href="{% url 'tool' tool.pk %}">{{ tool.title }}</a>
+            <a href="{% url 'manufacturer' tool.manufacturer.pk %}">({{ tool.manufacturer }})</a>, {{ tool.category.all|join:", " }}
+            <hr>
+            {% for toolcopy in tool.toolcopy_set.all %}
+            <hr>
+            <p class="{% if toolcopy.status == 'a' %}text-success{% elif toolcopy.status == 'b' %}text-danger{% else %}text-warning{% endif %}">
+            {% if toolcopy.status == 'a' %}
+            {{ toolcopy.get_status_display }}
+            {% else %}
+            {{ toolcopy.get_status_display }} till {{ toolcopy.due_back }}
+            {% endif %}
+            </p>
+            {% if user.is_superuser %}
+
+            {% else %}
+            {% if toolcopy.status == 'a' %}
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p>There is no tools in our page, sorry :(.</p>
+  {% endif %}
+{% endblock %}

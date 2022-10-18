@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New tool reservation</legend>
+            {{ form }}
+            {{ toolcopy.tool }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-secondary btn-sm" type="submit">Reserve for 10 days</button>
+        </div>
+    </form>
+    </div>
+{% endblock content %}

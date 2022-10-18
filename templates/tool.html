@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<img src="{{ tool.image.url }}"  width="300" height="auto" style="margin-bottom: 20px;">
+<h4>{{ tool.title }}</h4>
+<br>
+
+  <p><strong>Manufacturer:</strong> <a href="{% url 'manufacturer' tool.manufacturer.pk %}">{{ tool.manufacturer }}</a></p>
+  <p><strong>Production date:</strong> {{ tool.date_production }}</p>
+  <p><strong>Category:</strong> {{ tool.category.all|join:", " }}</p>
+  <p><strong>EAN:</strong> {{ tool.ean_code }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>This {{ tool.title }} copies we have:</h4>
+
+    {% for toolcopy in tool.toolcopy_set.all %}
+      <hr>
+      <p class="{% if toolcopy.status == 'a' %}text-success{% elif toolcopy.status == 'r' %}text-danger{% else %}text-warning{% endif %}">
+        {{ toolcopy.get_status_display }}
+      </p>
+      {% if toolcopy.status != 'a' %}
+        <p><strong>Will be available from:</strong> {{ toolcopy.due_back }}</p>
+      {% endif %}
+      <p class="text-muted"><strong>Id:</strong> {{ toolcopy.id }}</p>
+    {% if toolcopy.status == 'a' %}
+    {% if user.is_superuser == False %}
+       <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-reserve' toolcopy.id %}">Reserve</a>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  </div>
+<br>
+<a class="btn btn-outline-secondary btn-sm" href="{% url 'home' %}">Home</a>
+{% endblock %}

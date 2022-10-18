@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+{% if user.is_superuser %}
+{% if toolcopies_all %}
+<h1>All tool copies:</h1>
+<hr>
+  <div class="row">
+    {% for toolcopy in toolcopies_all %}
+      <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+          {% if toolcopy.tool.image %}
+          <img src="{{toolcopy.tool.image.url}}" class="card-img-top" alt="...">
+          {% else %}
+          <img src="{% static 'img/no-image.jpg' %}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <a href="{% url 'tool' toolcopy.tool.pk %}">{{ toolcopy.tool }}</a>
+            <hr>
+            <p class="{% if toolcopy.status == 'a' %}text-success{% elif toolcopy.status == 'b' %}text-danger{% else %}text-warning{% endif %}">
+            {% if toolcopy.status == 'a' %}
+            {{ toolcopy.get_status_display }}
+            {% else %}
+            {{ toolcopy.get_status_display }} by {{ toolcopy.customer }} till {{ toolcopy.due_back }}
+            {% endif %}
+            </p>
+            <li><strong class="{% if toolcopy.is_overdue %}text-danger{% endif %}">Due back: {{ toolcopy.due_back }}</strong></li>
+
+            <div>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update' toolcopy.id %}">Edit</a>
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'toolcopy-delete' toolcopy.id %}">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p>There is no tools in our page, sorry :(.</p>
+  {% endif %}
+{% else %}
+{% if toolcopies %}
+<h1>My borrowed or reserved tools:</h1>
+<hr>
+  <div class="row">
+    {% for toolcopy in toolcopies %}
+      <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+          {% if toolcopy.tool.image %}
+          <img src="{{toolcopy.tool.image.url}}" class="card-img-top" alt="...">
+          {% else %}
+          <img src="{% static 'img/no-image.jpg' %}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <a href="{% url 'tool' toolcopy.tool.pk %}">{{ toolcopy.tool }}</a>
+            <hr>
+            <p class="{% if toolcopy.status == 'a' %}text-success{% elif toolcopy.status == 'b' %}text-danger{% else %}text-warning{% endif %}">
+            {% if toolcopy.status == 'a' %}
+            {{ toolcopy.get_status_display }}
+            {% else %}
+            {{ toolcopy.get_status_display }} by {{ toolcopy.customer }} till {{ toolcopy.due_back }}
+            {% endif %}
+            </p>
+            <li><strong class="{% if toolcopy.is_overdue %}text-danger{% endif %}">Due back: {{ toolcopy.due_back }}</strong></li>
+            {% if toolcopy.status == 'r' %}
+            <hr>
+            <div>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'toolcopy-update-cancel-reserve' toolcopy.id %}">Cancel reservation</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p>There is no tools in our page, sorry :(.</p>
+  {% endif %}
+{% endif %}
+<br>
+<a class="btn btn-outline-secondary btn-sm" href="{% url 'home' %}">Home</a>
+
+
+{% endblock %}
+
+
+
+<li><strong>Due back:</strong> {{object.due_back}}</li>

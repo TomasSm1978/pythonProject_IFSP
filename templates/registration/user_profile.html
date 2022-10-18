@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Hey hey hey, it's me:</h1>
+<hr>
+    <img class="rounded-circle account-img" alt="" width="150" height="auto" src="{{ user.image.url }}">
+<br>
+<br>
+<div class="media-body">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>First name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last name:</strong> {{ user.last_name }}</p>
+    <p><strong>E-mail:</strong> {{ user.email }}</p>
+    <p><strong>Is staff?:</strong> {{ user.is_staff }}</p>
+</div>
+
+<a class="btn btn-outline-secondary btn-sm" href="{% url 'home' %}">Home</a>
+{% endblock content %}

@@ -1,7 +1,61 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <h1>NEW IFSP </h1>
-  <p>Welcome to my new future project!</p>
+{% load static %}
+  <h1 class="text-center">Welcome to the best tools rent reservation page!</h1>
+  <p></p>
+  <div class="row">
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h2>You're on the right way.</h2>
+          <h2>Today we offer:</h2>
+          <hr>
+          <ul>
+          <li><strong>Manufacturers:</strong> {{ num_manufacturers }}</li>
+          <li><strong>Categories:</strong> {{ num_category }}</li>
+          <li><strong>Tools:</strong> {{ num_tool }}</li>
+          <li><strong>Tools copies:</strong> {{ num_toolcopy }}</li>
+          <li><strong>Tools copies available:</strong> {{ num_toolcopy_available }}</li>
+          <li><strong>Tools copies reserved:</strong> {{ num_toolcopy_reserved }}</li>
+          <li><strong>Tools copies borrowed:</strong> {{ num_toolcopy_borrowed }}</li>
+          <li><strong>Number of this page users:</strong> {{ num_users }}</li>
+        </ul>
+          <hr>
+          <br>
+        <p>Your visits: {{ num_visits }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        <img src="{% static 'img/Tools-with-Helmet.jpg' %}" class="card-img-top">
+        <div class="card-body">
+          <ul>
+            <li><h2>Choose a tool</h2></li>
+            <li><h2>Reserve it</h2></li>
+            <li><h2>Come</h2></li>
+            <li><h2>Get it!</h2></li>
+          </ul>
 
-  {% endblock %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+         <ul>
+            <li><h2>Best tools</h2></li>
+            <li><h2>Wide assortment</h2></li>
+            <li><h2>One place</h2></li>
+         </ul>
+           <br>
+          <hr>
+           <h2 class="text-center">Try us!</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+

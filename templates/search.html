@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Search by "{{query}}" results:</h1>
+  </br>
+  {% if tools %}
+  <ul>
+    {% for tool in tools %}
+      <li>
+        <a href="{% url 'tool' tool.id %}">{{ tool.title }}</a> ({{ tool.manufacturer }}), {{ tool.toolcopy.get_status_display }}
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Nothing has been found :(</p>
+  {% endif %}
+
+  {% endblock %}

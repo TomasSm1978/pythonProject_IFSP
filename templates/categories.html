@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Categories:</h1>
+  {% for c in categories %}
+    <hr>
+    <li>
+      <p>{{ c.name }} </p>
+      <p>Tools we offer: </p>
+
+      <p>{{ c.tool_set.all|join:"<br> " }}</p>
+    </li>
+    {% endfor %}
+<br>
+<a class="btn btn-outline-secondary btn-sm" href="{% url 'home' %}">Home</a>
+{% endblock %}
