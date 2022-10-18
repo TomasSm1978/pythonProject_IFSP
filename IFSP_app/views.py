@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from datetime import date, timedelta
 from django.db.models import Q
 
+
 def home(request):
     num_tool = Tool.objects.all().count()
     num_category = Category.objects.all().count()
@@ -20,15 +21,15 @@ def home(request):
     num_visits = request.session.get('num_visits', 1)
     request.session['num_visits'] = num_visits + 1
     context = {
-    'num_tool': num_tool,
-    'num_category': num_category,
-    'num_toolcopy': num_toolcopy,
-    'num_toolcopy_available': num_toolcopy_available,
-    'num_toolcopy_reserved': num_toolcopy_reserved,
-    'num_toolcopy_borrowed': num_toolcopy_borrowed,
-    'num_manufacturers': num_manufacturers,
-    'num_visits': num_visits,
-    'num_users': num_users,
+        'num_tool': num_tool,
+        'num_category': num_category,
+        'num_toolcopy': num_toolcopy,
+        'num_toolcopy_available': num_toolcopy_available,
+        'num_toolcopy_reserved': num_toolcopy_reserved,
+        'num_toolcopy_borrowed': num_toolcopy_borrowed,
+        'num_manufacturers': num_manufacturers,
+        'num_visits': num_visits,
+        'num_users': num_users,
     }
     return render(request, 'home.html', context=context)
 
@@ -163,5 +164,6 @@ class ToolCopyDeleteView(LoginRequiredMixin, DeleteView):
 
 def search(request):
     query = request.GET.get('query')
-    search_results = Tool.objects.filter(Q(title__icontains=query) | Q(manufacturer__name__icontains=query) | Q(manufacturer__country_origin__icontains=query) | Q(category__name__icontains=query))
+    search_results = Tool.objects.filter(Q(title__icontains=query) | Q(manufacturer__name__icontains=query) | Q(
+        manufacturer__country_origin__icontains=query) | Q(category__name__icontains=query))
     return render(request, 'search.html', {'tools': search_results, 'query': query})

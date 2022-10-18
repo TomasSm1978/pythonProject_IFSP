@@ -37,10 +37,11 @@ class Tool(models.Model):
     image = models.ImageField('Image', upload_to='images', null=True, blank=True)
 
     def get_absolute_url(self):
-       return reverse('tool-detail', args=[str(self.id)])
+        return reverse('tool-detail', args=[str(self.id)])
 
     def __str__(self):
-        return f'{self.title} ({self.manufacturer.name}, {self.manufacturer.country_origin}, {self.ean_code}, {self.date_production})'
+        return f'{self.title} ({self.manufacturer.name}, {self.manufacturer.country_origin}, {self.ean_code}, /' \
+               f'{self.date_production})'
 
     def display_category(self):
         return ', '.join(category.name for category in self.category.all()[:3])
@@ -65,7 +66,7 @@ class ToolCopy(models.Model):
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-       return f'{self.tool.title}, {self.price} eur'
+        return f'{self.tool.title}, {self.price} eur'
 
     @property
     def is_overdue(self):
