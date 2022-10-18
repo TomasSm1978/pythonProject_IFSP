@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Category, Manufacturer, Tool, ToolCopy
+from .models import Category, Manufacturer, Tool, ToolCopy, User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,7 +13,10 @@ def home(request):
     num_category = Category.objects.all().count()
     num_toolcopy = ToolCopy.objects.all().count()
     num_toolcopy_available = ToolCopy.objects.filter(status__exact='a').count()
-    num_manufacturers = Manufacturer.objects.count()
+    num_toolcopy_reserved = ToolCopy.objects.filter(status__exact='r').count()
+    num_toolcopy_borrowed = ToolCopy.objects.filter(status__exact='b').count()
+    num_manufacturers = Manufacturer.objects.all().count()
+    num_users = User.objects.all().count()
     num_visits = request.session.get('num_visits', 1)
     request.session['num_visits'] = num_visits + 1
     context = {
@@ -21,8 +24,11 @@ def home(request):
     'num_category': num_category,
     'num_toolcopy': num_toolcopy,
     'num_toolcopy_available': num_toolcopy_available,
+    'num_toolcopy_reserved': num_toolcopy_reserved,
+    'num_toolcopy_borrowed': num_toolcopy_borrowed,
     'num_manufacturers': num_manufacturers,
     'num_visits': num_visits,
+    'num_users': num_users,
     }
     return render(request, 'home.html', context=context)
 

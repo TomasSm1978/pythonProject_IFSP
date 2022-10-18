@@ -1,15 +1,39 @@
 {% extends "base.html" %}
-
 {% block content %}
+{% load static %}
   <h1>Tools rent</h1>
   <p>Welcome to tools rent reservation page!</p>
-  <p>Today we offer:</p>
-  <ul>
-    <li><strong>Manufacturers:</strong> {{ num_manufacturers }}</li>
-    <li><strong>Categories:</strong> {{ num_category }}</li>
-    <li><strong>Tools:</strong> {{ num_tool }}</li>
-    <li><strong>Tools copies:</strong> {{ num_toolcopy }}</li>
-    <li><strong>Tools copies available:</strong> {{ num_toolcopy_available }}</li>
-  </ul>
-  <p>Your visits: {{ num_visits }}</p>
+  <div class="row">
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h2>You're on the right way. You're visiting the best tool rent service page!</h2>
+          <hr>
+          <p>Today:</p>
+          <ul>
+          <li><strong>Manufacturers:</strong> {{ num_manufacturers }}</li>
+          <li><strong>Categories:</strong> {{ num_category }}</li>
+          <li><strong>Tools:</strong> {{ num_tool }}</li>
+          <li><strong>Tools copies:</strong> {{ num_toolcopy }}</li>
+          <li><strong>Tools copies available:</strong> {{ num_toolcopy_available }}</li>
+          <li><strong>Tools copies reserved:</strong> {{ num_toolcopy_reserved }}</li>
+          <li><strong>Tools copies borrowed:</strong> {{ num_toolcopy_borrowed }}</li>
+          <li><strong>Number of this page users:</strong> {{ num_users }}</li>
+        </ul>
+        <p>Your visits: {{ num_visits }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        <img src="{% static 'img/no-image.jpg' %}" class="card-img-top">
+        <div class="card-body">
+          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sapien sapien, efficitur nec magna at, tincidunt convallis augue. In egestas eros in dictum finibus. Donec vehicula cursus pretium. Mauris a dolor eget justo consequat cursus. Nunc mollis nibh a risus congue congue. Donec egestas fermentum risus in molestie. Donec semper faucibus facilisis. Maecenas ac erat justo. Praesent eget ipsum at eros luctus consectetur. Etiam posuere vulputate mollis. Ut viverra pulvinar turpis at aliquet. Suspendisse ullamcorper egestas leo non tristique. Suspendisse potenti.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
+
+
